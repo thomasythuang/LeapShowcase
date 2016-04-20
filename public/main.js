@@ -3,16 +3,28 @@ window.plotter = new LeapDataPlotter({
 });
 
 var sample;
+var volume = 1.0;
 
 var app = angular.module('LeapShowcase', ['ui.bootstrap',]);
 app.controller('mainController', function($scope){
   sample = new Audio('resources/sounds/hotlinebling.mp3');
 
   $scope.volume = 100;
+  $scope.rate = sample.playbackRate;
 
-  $scope.playSample = function(){
-    playSample();
+  $scope.play = function(){
+    play();
     $scope.rate = sample.playbackRate;
+  }
+
+  $scope.play = function(){
+    play();
+  }
+  $scope.pause = function(){
+    pause();
+  }
+  $scope.quiet = function(){
+    quiet();
   }
 
   $scope.fasterSpeed = function(){
@@ -60,7 +72,8 @@ Leap.loop({background: true}, function(frame){
   plotter.update()
 });
 
-function playSample() {
+
+function play(){
   sample.play();
   sample.playbackRate = 1.0;
 }
@@ -75,6 +88,13 @@ function slowerSpeed() {
 
 function reverseSong() {
   sample.playbackRate= -1.0;
+}
+
+function pause(){
+  sample.pause();
+}
+function quiet(){
+  sample.volume = 0.5;
 }
 
 // Adds the rigged hand plugin to the controller
