@@ -14,7 +14,7 @@ app.use(morgan('dev'));
 
 // routes ======================================================================
 app.get('/', function(req, res){
-	res.sendFile('public/bump.html', {root: __dirname});
+	res.sendFile('public/main.html', {root: __dirname});
 });
 
 // listen (start app with node server.js) ======================================

@@ -1,0 +1,39 @@
+<html ng-app="LeapShowcase" class="no-js">
+<head>
+  <title>LeapShowcase</title>
+  
+  <script src="/resources/angular.min.js"></script>
+  <link href='//fonts.googleapis.com/css?family=Open+Sans|Syncopate' rel='stylesheet' type='text/css'>
+  <link href="main.css" rel="stylesheet" type="text/css">
+  <link href="/resources/bootstrap.min.css" rel="stylesheet" type="text/css">
+</head>
+
+<body ng-controller="mainController">
+	<div id="main">
+    <div class="title">
+      <div>DJ LEAP</div>
+    </div>
+    
+    <buton ng-click="playSample()" class="btn btn-default">
+      Test
+    </buton>
+    <p>{{volume}}</p>
+
+  </div>
+  <canvas id="plots"></canvas>
+  <div id="widget"></div>
+
+
+
+  
+  <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/three.js/r67/three.js"></script>
+  <script src="//js.leapmotion.com/leap-0.6.2.min.js"></script>
+  <script src="//js.leapmotion.com/leap-plugins-0.1.6.1.js"></script>
+  <script src="//js.leapmotion.com/leap.rigged-hand-0.1.4.min.js"></script>
+  <script src="//js.leapmotion.com/leap-plugins-0.1.10-utils.js"></script>
+  <script src="/resources/ui-bootstrap.min.js"></script>
+  <!-- <script src="/resources/bootstrap.min.js"></script> -->
+  <script src="/main.js"></script>
+</body>
+</html>  
