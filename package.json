@@ -1,0 +1,11 @@
+{
+  "name": "LeapMotionShowcase",
+  "version": "0.0.0",
+  "description": "Creative stretch for HW2: Technology showcase",
+  "main": "server.js",
+  "author": "Thomas Huang",
+  "dependencies": {
+    "express": "~4.10.1",
+    "morgan": "~1.1.1"
+  }
+}
