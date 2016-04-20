@@ -3,6 +3,7 @@ window.plotter = new LeapDataPlotter({
 });
 
 var sample;
+var volume = 1.0;
 
 var app = angular.module('LeapShowcase', ['ui.bootstrap',]);
 app.controller('mainController', function($scope){
@@ -10,8 +11,14 @@ app.controller('mainController', function($scope){
 
   $scope.volume = 100;
 
-  $scope.playSample = function(){
-    playSample();
+  $scope.play = function(){
+    play();
+  }
+  $scope.pause = function(){
+    pause();
+  }
+  $scope.quiet = function(){
+    quiet();
   }
 });
 
@@ -49,8 +56,14 @@ Leap.loop({background: true}, function(frame){
   plotter.update()
 });
 
-function playSample(){
+function play(){
   sample.play();
+}
+function pause(){
+  sample.pause();
+}
+function quiet(){
+  sample.volume = 0.5;
 }
 
 // Adds the rigged hand plugin to the controller
