@@ -13,6 +13,7 @@ app.controller('mainController', function($scope){
     'resources/sounds/hotlinebling.mp3',
     'resources/sounds/roses.mp3',
     'resources/sounds/work.mp3',
+    'resources/sounds/cake.mp3'
   ]
   sample = new Audio($scope.sounds[0]);
   $scope.songIndex = 0;
@@ -48,13 +49,6 @@ app.controller('mainController', function($scope){
     restoreDefaults();
     sample.play();
   })
-  /*
-  $scope.changeSong = function(index){
-    sample.pause();
-    sample = new Audio($scope.sounds[index]);
-    restoreDefaults();
-    sample.play();
-  }*/
 
 });
 
@@ -98,7 +92,6 @@ Leap.loop({enableGestures: true, background: true}, function(frame){
     });
   }
 
-
   if(frame.valid && frame.gestures.length > 0){
     frame.gestures.forEach(function(gesture){
         switch (gesture.type){
@@ -135,7 +128,7 @@ Leap.loop({enableGestures: true, background: true}, function(frame){
 
           case "screenTap":
                console.log("Screen Tap Gesture");
-               sample.playbackRate = 1.0;
+               restoreDefaults();
                break;
 
           // case "swipe":
