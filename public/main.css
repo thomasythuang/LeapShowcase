@@ -1,5 +1,5 @@
 body{
-  font-family: "Open Sans", sans-serif !important;  
+  font-family: "Open Sans", sans-serif !important;
   height: 100%;
   width: 100%;
   margin: 0;
@@ -24,7 +24,7 @@ img#connect-leap{
 	height: 100%;
 	width: 100%;
 	margin: 0;
-  background-color: #ededed;
+  background-color: black;
 }
 #widget{
   position: fixed;
@@ -45,7 +45,26 @@ img#connect-leap{
 .title div{
   font-size: 5em;
   font-family: "Syncopate", sans-serif;
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  border: none;
+  color: rgba(255,255,255,1);
+  text-decoration: normal;
+  text-align: center;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  white-space: pre;
+  text-shadow: 0 0 10px rgba(255,255,255,1) , 0 0 20px rgba(255,255,255,1) , 0 0 30px rgba(255,255,255,1) , 0 0 40px #CFE2F6 , 0 0 70px #CFE2F6 , 0 0 80px #CFE2F6 , 0 0 100px #CFE2F6 ;
+  -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
 }
+
+
 .btn-group{
   margin-bottom: 10px;
 }

@@ -14,32 +14,36 @@
       <div>DJ LEAP</div>
     </div>
 
-    <button ng-click="play()" class="btn btn-default">
-      Play/Reset
-    </button>
+    <div class="buttons">
+      <button ng-click="play()" class="btn btn-default">
+        Play/Reset
+      </button>
 
-    <button ng-click="pause()" class="btn btn-default">
-      Pause
-    </button>
+      <button ng-click="pause()" class="btn btn-default">
+        Pause
+      </button>
 
-    <button ng-click="quieter()" class="btn btn-default">
-      Quieter
-    </button>
+      <button ng-click="quieter()" class="btn btn-default">
+        Quieter
+      </button>
 
-    <button ng-click="louder()" class="btn btn-default">
-      Louder
-    </button>
+      <button ng-click="louder()" class="btn btn-default">
+        Louder
+      </button>
 
-    <button ng-click="fasterSpeed()" class="btn btn-default">
-      Faster
-    </button>
+      <button ng-click="fasterSpeed()" class="btn btn-default">
+        Faster
+      </button>
 
-    <button ng-click="slowerSpeed()" class="btn btn-default">
-      Slower
-    </button>
+      <button ng-click="slowerSpeed()" class="btn btn-default">
+        Slower
+      </button>
+    </div>
 
-    <p>{{volume}}</p>
-    <p>{{rate}}</p>
+    <div class="stats">
+      <p>{{volume}}</p>
+      <p>{{rate}}</p>
+    </div>
 
   </div>
   <canvas id="plots"></canvas>
