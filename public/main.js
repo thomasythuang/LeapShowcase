@@ -2,13 +2,15 @@ window.plotter = new LeapDataPlotter({
 	el: document.getElementById('plots')
 });
 
+var extScope;
 var sample;
 var volume = 1.0; // default max volume
 var ymin = 100, ymax = 350; // min and max heights for detecting hand height
+var leftSwipeReady = true, rightSwipeReady = true;
 
 var app = angular.module('LeapShowcase', ['ui.bootstrap',]);
 app.controller('mainController', function($scope){
-
+  extScope = $scope;
   $scope.sounds = [
     'resources/sounds/hotlinebling.mp3',
     'resources/sounds/roses.mp3',
@@ -64,6 +66,7 @@ Leap.loop({enableGestures: true, background: true}, function(frame){
     var v1x = hand1.palmVelocity[0];
     var v1y = hand1.palmVelocity[1];
 
+    // Setting volume
     if (hand1.grabStrength > 0.9){
       if (y1 < ymin){
         y1 = ymin;
@@ -73,6 +76,20 @@ Leap.loop({enableGestures: true, background: true}, function(frame){
 
       y1 = (y1 - ymin) / (ymax - ymin);
       setVolume(y1);
+    }
+
+    if (v1x < -1000 && leftSwipeReady){
+      prevSong();
+      leftSwipeReady = false;
+    }else if (v1x > 0){
+      leftSwipeReady = true;
+    }
+
+    if (v1x > 1000 && rightSwipeReady){
+      nextSong();
+      rightSwipeReady = false;
+    }else if (v1x < 0){
+      rightSwipeReady = true;
     }
 
     // call this once per frame per plot
@@ -110,12 +127,12 @@ Leap.loop({enableGestures: true, background: true}, function(frame){
               if (completeCircles >= 1 && state=="update"){
                 if (clockwise){
                   fasterSpeed();
-                  console.log("faster");
+                  //console.log("faster");
                   console.log(sample.playbackRate);
                 }
                 if (!clockwise){
                   slowerSpeed();
-                  console.log("slower");
+                  //console.log("slower");
                   console.log(sample.playbackRate);
                 }
               }
@@ -177,6 +194,30 @@ function louder(){
 function restoreDefaults(){
   sample.volume = 1.0;
   sample.playbackRate = 1.0;
+}
+function prevSong(){
+  var scope = extScope;
+  scope.$apply(function(){
+    if (scope.songIndex > 0){
+      scope.songIndex--;
+      sample.pause();
+      sample = new Audio(scope.sounds[scope.songIndex]);
+      restoreDefaults();
+      sample.play();
+    }
+  });
+}
+function nextSong(){
+  var scope = extScope;
+  scope.$apply(function(){
+    if (scope.songIndex < 3){
+      scope.songIndex++;
+      sample.pause();
+      sample = new Audio(scope.sounds[scope.songIndex]);
+      restoreDefaults();
+      sample.play();
+    }
+  });
 }
 
 // Adds the rigged hand plugin to the controller
