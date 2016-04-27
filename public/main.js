@@ -38,7 +38,7 @@ app.controller('mainController', function($scope){
 
 });
 
-Leap.loop({background: true}, function(frame){
+Leap.loop({enableGestures: true, background: true}, function(frame){
   var hand1 = frame.hands[0];
   var hand2 = frame.hands[1];
   if (!hand1 && !hand2) return;
@@ -68,6 +68,49 @@ Leap.loop({background: true}, function(frame){
     });
   }
 
+
+  if(frame.valid && frame.gestures.length > 0){
+    frame.gestures.forEach(function(gesture){
+        switch (gesture.type){
+          case "circle":
+              var state = gesture.state;
+              var circleProgress = gesture.progress;
+              var completeCircles = Math.floor(circleProgress);
+
+              // check direction
+              var clockwise = false;
+              var pointableID = gesture.pointableIds[0];
+              var direction = frame.pointable(pointableID).direction;
+              var dotProduct = Leap.vec3.dot(direction, gesture.normal);
+              if (dotProduct  >  0) clockwise = true;
+
+              if (completeCircles >= 1 && state=="update"){
+                if (clockwise){
+                  fasterSpeed();
+                  console.log("faster");
+                  console.log(sample.playbackRate);
+                }
+                if (!clockwise){
+                  slowerSpeed();
+                  console.log("slower");
+                  console.log(sample.playbackRate);
+                }
+              }
+
+              break;
+          // case "keyTap":
+          //     console.log("Key Tap Gesture");
+          //     break;
+          // case "screenTap":
+          //     console.log("Screen Tap Gesture");
+          //     break;
+          // case "swipe":
+          //     console.log("Swipe Gesture");
+          //     break;
+        }
+    });
+  }
+
   // call this once per frame
   plotter.update()
 });
@@ -78,10 +121,10 @@ function play(){
   sample.playbackRate = 1.0;
 }
 function fasterSpeed() {
-  sample.playbackRate = sample.playbackRate*1.2;
+  sample.playbackRate = sample.playbackRate*1.005;
 }
 function slowerSpeed() {
-  sample.playbackRate= sample.playbackRate/1.2;
+  sample.playbackRate= sample.playbackRate/1.005;
 }
 function reverseSong() {
   sample.playbackRate= -1.0;
