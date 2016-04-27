@@ -8,8 +8,14 @@ var ymin = 100, ymax = 350; // min and max heights for detecting hand height
 
 var app = angular.module('LeapShowcase', ['ui.bootstrap',]);
 app.controller('mainController', function($scope){
-  sample = new Audio('resources/sounds/work.mp3');
 
+  $scope.sounds = [
+    'resources/sounds/hotlinebling.mp3',
+    'resources/sounds/roses.mp3',
+    'resources/sounds/work.mp3',
+  ]
+  sample = new Audio($scope.sounds[0]);
+  $scope.songIndex = 0;
   $scope.volume = 100;
   $scope.rate = sample.playbackRate;
 
@@ -36,6 +42,19 @@ app.controller('mainController', function($scope){
     slowerSpeed();
     $scope.rate = sample.playbackRate;
   }
+  $scope.$watch('songIndex', function(){
+    sample.pause();
+    sample = new Audio($scope.sounds[$scope.songIndex]);
+    restoreDefaults();
+    sample.play();
+  })
+  /*
+  $scope.changeSong = function(index){
+    sample.pause();
+    sample = new Audio($scope.sounds[index]);
+    restoreDefaults();
+    sample.play();
+  }*/
 
 });
 
@@ -161,6 +180,10 @@ function louder(){
   {
     sample.volume -= 0.1;
   }
+}
+function restoreDefaults(){
+  sample.volume = 1.0;
+  sample.playbackRate = 1.0;
 }
 
 // Adds the rigged hand plugin to the controller

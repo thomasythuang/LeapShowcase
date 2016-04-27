@@ -38,7 +38,15 @@
       Slower
     </button>
 
-    <p>{{volume}}</p>
+    <br>
+    <div class="btn-group" data-toggle="buttons">
+      <label class="btn btn-primary" btn-radio="0" ng-model="songIndex">Hotline Bling</label>
+      <label class="btn btn-primary" btn-radio="1" ng-model="songIndex">Roses</label>
+      <label class="btn btn-primary" btn-radio="2" ng-model="songIndex">Hotline Bling</label>
+      <label class="btn btn-primary" btn-radio="3" ng-model="songIndex">Hotline Bling</label>
+    </div>
+
+    <p>{{songIndex}}</p>
     <p>{{rate}}</p>
 
   </div>
