@@ -8,7 +8,7 @@ var ymin = 100, ymax = 350; // min and max heights for detecting hand height
 
 var app = angular.module('LeapShowcase', ['ui.bootstrap',]);
 app.controller('mainController', function($scope){
-  sample = new Audio('resources/sounds/hotlinebling.mp3');
+  sample = new Audio('resources/sounds/work.mp3');
 
   $scope.volume = 100;
   $scope.rate = sample.playbackRate;
@@ -109,12 +109,16 @@ Leap.loop({enableGestures: true, background: true}, function(frame){
               }
 
               break;
+
           // case "keyTap":
           //     console.log("Key Tap Gesture");
           //     break;
-          // case "screenTap":
-          //     console.log("Screen Tap Gesture");
-          //     break;
+
+          case "screenTap":
+               console.log("Screen Tap Gesture");
+               sample.playbackRate = 1.0;
+               break;
+
           // case "swipe":
           //     console.log("Swipe Gesture");
           //     break;
