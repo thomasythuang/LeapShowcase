@@ -3,7 +3,8 @@ window.plotter = new LeapDataPlotter({
 });
 
 var sample;
-var volume = 1.0;
+var volume = 1.0; // default max volume
+var ymin = 100, ymax = 350; // min and max heights for detecting hand height
 
 var app = angular.module('LeapShowcase', ['ui.bootstrap',]);
 app.controller('mainController', function($scope){
@@ -50,6 +51,16 @@ Leap.loop({background: true}, function(frame){
     var v1x = hand1.palmVelocity[0];
     var v1y = hand1.palmVelocity[1];
 
+    if (hand1.grabStrength > 0.9){
+      if (y1 < ymin){
+        y1 = ymin;
+      }else if(y1 > ymax){
+        y1 = ymax;
+      }
+
+      y1 = (y1 - ymin) / (ymax - ymin);
+      setVolume(y1);
+    }
 
     // call this once per frame per plot
     plotter.plot('height 1', y1, {
@@ -88,6 +99,9 @@ function reverseSong() {
 }
 function pause(){
   sample.pause();
+}
+function setVolume(vol){
+  sample.volume = vol;
 }
 function quieter(){
   if (sample.volume < 1.0)
