@@ -16,17 +16,17 @@ app.controller('mainController', function($scope){
     play();
     $scope.rate = sample.playbackRate;
   }
-
-  $scope.play = function(){
-    play();
-  }
   $scope.pause = function(){
     pause();
   }
-  $scope.quiet = function(){
-    quiet();
+  $scope.quieter = function(){
+    quieter();
+    $scope.volume = Math.round(sample.volume * 100);
   }
-
+  $scope.louder = function(){
+    louder();
+    $scope.volume = Math.round(sample.volume * 100);
+  }
   $scope.fasterSpeed = function(){
     fasterSpeed();
     $scope.rate = sample.playbackRate;
@@ -77,24 +77,29 @@ function play(){
   sample.play();
   sample.playbackRate = 1.0;
 }
-
 function fasterSpeed() {
   sample.playbackRate = sample.playbackRate*1.2;
 }
-
 function slowerSpeed() {
   sample.playbackRate= sample.playbackRate/1.2;
 }
-
 function reverseSong() {
   sample.playbackRate= -1.0;
 }
-
 function pause(){
   sample.pause();
 }
-function quiet(){
-  sample.volume = 0.5;
+function quieter(){
+  if (sample.volume < 1.0)
+  {
+    sample.volume += 0.1;
+  }
+}
+function louder(){
+  if (sample.volume > 0.0)
+  {
+    sample.volume -= 0.1;
+  }
 }
 
 // Adds the rigged hand plugin to the controller
