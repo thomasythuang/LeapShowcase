@@ -41,6 +41,12 @@ app.controller('mainController', function($scope){
     slowerSpeed();
     $scope.rate = sample.playbackRate;
   }
+  $scope.$watch('songIndex', function(){
+    sample.pause();
+    sample = new Audio($scope.sounds[$scope.songIndex]);
+    restoreDefaults();
+    sample.play();
+  })
   /*
   $scope.changeSong = function(index){
     sample.pause();
