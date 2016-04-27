@@ -40,17 +40,18 @@
       </button>
     </div>
 
-    <div class="stats">
-      <p>{{volume}}</p>
-      <p>{{rate}}</p>
+    <br>
+    <div class="btn-group" data-toggle="buttons">
+      <label class="btn btn-primary" btn-radio="0" ng-model="songIndex">Hotline Bling</label>
+      <label class="btn btn-primary" btn-radio="1" ng-model="songIndex">Roses</label>
+      <label class="btn btn-primary" btn-radio="2" ng-model="songIndex">Work</label>
+      <label class="btn btn-primary" btn-radio="3" ng-model="songIndex">Cake By the Ocean</label>
     </div>
+
 
   </div>
   <canvas id="plots"></canvas>
   <div id="widget"></div>
-
-
-
 
   <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/three.js/r67/three.js"></script>
