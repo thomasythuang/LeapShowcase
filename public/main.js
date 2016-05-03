@@ -6,7 +6,7 @@ var extScope;
 var sample;
 var volume = 1.0; // default max volume
 var ymin = 100, ymax = 350; // min and max heights for detecting hand height
-var leftSwipeReady = true, rightSwipeReady = true;
+var leftSwipeReady = true, rightSwipeReady = true, downSwipeReady = true;
 
 var app = angular.module('LeapShowcase', ['ui.bootstrap',]);
 app.controller('mainController', function($scope){
@@ -76,6 +76,13 @@ Leap.loop({enableGestures: true, background: true}, function(frame){
 
       y1 = (y1 - ymin) / (ymax - ymin);
       setVolume(y1);
+    }
+
+    if (v1y < -900 && downSwipeReady){
+      togglePlay();
+      downSwipeReady = false;
+    }else if (v1y > 0){
+      downSwipeReady = true;
     }
 
     if (v1x < -1000 && leftSwipeReady){
@@ -148,9 +155,6 @@ Leap.loop({enableGestures: true, background: true}, function(frame){
                restoreDefaults();
                break;
 
-          // case "swipe":
-          //     console.log("Swipe Gesture");
-          //     break;
         }
     });
   }
@@ -163,6 +167,13 @@ Leap.loop({enableGestures: true, background: true}, function(frame){
 function play(){
   sample.play();
   sample.playbackRate = 1.0;
+}
+function togglePlay(){
+  if (sample.paused){
+    sample.play();
+  }else{
+    sample.pause();
+  }
 }
 function fasterSpeed() {
   sample.playbackRate = sample.playbackRate*1.005;
